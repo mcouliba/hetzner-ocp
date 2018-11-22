@@ -6,39 +6,39 @@ guests:
   virt_hypervisor: hvm
   network: bridge=virbr0
   os_type: linux
-  os_variant: rhel7.5
+  os_variant: rhel7
   disk_os_size: 40g
   region: bastion
 - name: master01
   cpu: 2
-  mem: 18384
+  mem: 14336 
   virt_type: kvm
   virt_hypervisor: hvm
   network: bridge=virbr0
   os_type: linux
-  os_variant: rhel7.5
+  os_variant: rhel7
   disk_os_size: 40g
   cns: 'true'
   region: master
 - name: infranode01
   cpu: 2
-  mem: 18384
+  mem: 14336
   virt_type: kvm
   virt_hypervisor: hvm
   network: bridge=virbr0
   os_type: linux
-  os_variant: rhel7.5
+  os_variant: rhel7
   disk_os_size: 40g
   cns: 'true'
   region: infra
 - name: node01
   cpu: 2
-  mem: 18384
+  mem: 14336
   virt_type: kvm
   virt_hypervisor: hvm
   network: bridge=virbr0
   os_type: linux
-  os_variant: rhel7.5
+  os_variant: rhel7
   disk_os_size: 40g
   cns: 'true'
   region: compute

@@ -1,18 +1,18 @@
-ocp_version: 3.9
+ocp_version: 3.11
 packages:
 - wget
 - git
 - net-tools
 - bind-utils
+- yum-utils
 - iptables-services
+- bridge-utils
 - bash-completion
-- nfs-utils
 - kexec-tools
 - sos
 - psacct
 packages_bastion:
-- atomic-openshift-utils
-- atomic-openshift-clients
+- openshift-ansible
 repos:
 - rhel-7-server-rpms
 - rhel-7-server-extras-rpms
@@ -28,16 +28,10 @@ hostpath_pv_names:  [ '01', '02', '03', '04', '05', '06', '07', '08', '09', '10'
 hostpath_pv_sizes:  [ '1Gi', '1Gi', '1Gi', '1Gi', '1Gi', '5Gi', '5Gi', '5Gi', '5Gi', '5Gi', '10Gi', '10Gi', '10Gi', '10Gi' ,'10Gi' ]
 hostpath_dir: /var/hostpath
 hostpath_size: 200G
-#nfs_pv_names:  [ '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14' ,'15', '16','17','18','19','20']
-#nfs_pv_sizes:  [ '1Gi', '1Gi', '1Gi', '1Gi', '5Gi', '5Gi', '5Gi', '5Gi', '10Gi', '10Gi', '10Gi', '10Gi', '25Gi', '25Gi', '25Gi', '25Gi', '50Gi', '50Gi' ,'50Gi','50Gi' ]
-#nfs_dir: /exports
-#nfs_size: 200G
-#docker_storage_device: /dev/vdb
-#docker_storage_size: 100G
 containers_storage_size: 100G
 cns_storage_size: 100G
 cns_storage_device: vdc
 registry_storage_device: vdd
 registry_storage_size: 100G
-apps_dns: apps.ocp.ninja
-master_dns: master.ocp.ninja
+apps_dns: apps.ocp.mcouliba.eu
+master_dns: master.ocp.mcouliba.eu
