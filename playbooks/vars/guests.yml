@@ -8,7 +8,7 @@ guests:
   os_type: linux
   os_variant: rhel7
   disk_os_size: 40g
-  region: bastion
+  role: bastion
 - name: master01
   cpu: 2
   mem: 14336 
@@ -19,7 +19,7 @@ guests:
   os_variant: rhel7
   disk_os_size: 40g
   cns: 'true'
-  region: master
+  role: master
 - name: infranode01
   cpu: 2
   mem: 14336
@@ -30,7 +30,7 @@ guests:
   os_variant: rhel7
   disk_os_size: 40g
   cns: 'true'
-  region: infra
+  role: infra
 - name: node01
   cpu: 2
   mem: 14336
@@ -41,4 +41,4 @@ guests:
   os_variant: rhel7
   disk_os_size: 40g
   cns: 'true'
-  region: compute
+  role: compute

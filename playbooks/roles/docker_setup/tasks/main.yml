@@ -1,11 +1,10 @@
 - name: Install needed packages
   yum:
-    name: "{{ item }}"
+    name:
+      - docker
+      - container-selinux
+      - atomic-openshift-docker-excluder
     state: present
-  with_items:
-    - docker
-    - container-selinux
-    - atomic-openshift-docker-excluder
 
 - name: check are raw images created
   local_action: |

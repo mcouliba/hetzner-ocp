@@ -13,10 +13,15 @@
     msg: |
       "master ip: {{master_ip_addr.stdout}}"
 
+- name: Get infranode ip addr
+  local_action:
+    shell ip n | grep "`virsh dumpxml infranode01 | grep "mac address" | sed "s/.*'\(.*\)'.*/\1/g"`" | awk '{ gsub(/[\(\)]/,"",$1); print $1"" }'
+  register: infranode_ip_addr
+
 - name:
   debug:
     msg: |
-      "master ip: {{master_ip_addr.stdout}}"
+      "master ip: {{infranode_ip_addr.stdout}}"
 - name: create http nat for infra
   iptables:
     table: nat
@@ -26,7 +31,7 @@
     match: tcp
     destination_port: 80
     jump: DNAT
-    to_destination: "{{master_ip_addr.stdout}}:80"
+    to_destination: "{{infranode_ip_addr.stdout}}:80"
     comment: Redirect http traffic to infranode
 
 - name: create https nat for infra
@@ -38,7 +43,7 @@
     match: tcp
     destination_port: 443
     jump: DNAT
-    to_destination: "{{master_ip_addr.stdout}}:443"
+    to_destination: "{{infranode_ip_addr.stdout}}:443"
     comment: Redirect https traffic to infranode
 
 - name: create https nat for master
@@ -68,7 +73,7 @@
   iptables:
     table: nat
     chain: POSTROUTING
-    destination: "{{master_ip_addr.stdout}}"
+    destination: "{{infranode_ip_addr.stdout}}"
     protocol: tcp
     match: tcp
     destination_port: 80
@@ -79,7 +84,7 @@
   iptables:
     table: nat
     chain: POSTROUTING
-    destination: "{{master_ip_addr.stdout}}"
+    destination: "{{infranode_ip_addr.stdout}}"
     protocol: tcp
     match: tcp
     destination_port: 443

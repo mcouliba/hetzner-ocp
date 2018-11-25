@@ -39,7 +39,7 @@
   gather_facts: no
   vars_files:
   - vars/guests.yml
-- include: prepare_host.yml
-- include: provision.yml
-- include: prepare_ssl.yml
-- include: prepare_guests.yml
+- import_playbook: prepare_host.yml
+- import_playbook: provision.yml
+- import_playbook: prepare_ssl.yml
+- import_playbook: prepare_guests.yml

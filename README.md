@@ -462,3 +462,19 @@ ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/config.yml
 By defaults guest VMs are provisioned using defaults. If you need to modify guest options to  better suit your needs, it can be done by modifying `playbooks/vars/guests.yml`
 
 Make modifications and start installtion process. Installer will automatically use file named `guests.yml`. Remember to clean old installation with `ansible-playbook playbooks/clean.yml`
+
+## Persistent Storage Using Red Hat Gluster Storage with CRI-O runtime fails due to permission denied 
+When using Red Hat Gluster Storage (converged mode) for Persistent Storage with CRI-O enabled, we might encounter the following issue (event) from glusterfs daemon pods in the project "cns":
+
+```
+Liveness probe errored: rpc error: code = Unknown desc = command error: time="2018-11-15T14:27:20Z" level=error msg="open /dev/null: permission denied"
+open /dev/null: permission denied
+exec failed: container_linux.go:336: starting container process caused "read init-p: connection reset by peer"
+, stdout: , stderr: , exit code -1
+```
+
+The solution is **to remove the /dev bind-mount from the glusterfs-cns daemonset configuration** and to force new pod replicas to be created by deleting the old replicas.
+```
+[cloud-user@master01 ~]$ oc delete pods --all -n cns
+```
+

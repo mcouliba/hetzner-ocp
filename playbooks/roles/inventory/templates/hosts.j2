@@ -6,7 +6,7 @@ masters
 nodes
 etcd
 {% if number_of_cns_nodes == '3' %}
-glusterfs
+#CNSglusterfs
 {% endif %}
 
 # Set variables common for all OSEv3 hosts
@@ -209,10 +209,10 @@ openshift_generate_no_proxy_hosts=true
 {% endfor %}
 
 {% if number_of_cns_nodes == '3' %}
-[glusterfs]
+#CNS[glusterfs]
 {% for host in guests %}
 {% if host.cns is defined and host.cns %}
-{{host.name}} glusterfs_ip={{hostvars[host.name]['ansible_default_ipv4']['address']}} glusterfs_devices='["/dev/{{ cns_storage_device }}"]'
+#CNS{{host.name}} glusterfs_ip={{hostvars[host.name]['ansible_default_ipv4']['address']}} glusterfs_devices='["/dev/{{ cns_storage_device }}"]'
 {% endif %}
 {% endfor %}
 {% endif %}
